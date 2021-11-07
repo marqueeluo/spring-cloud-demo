@@ -31,7 +31,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     public RespResult debit(String userId, BigDecimal money) {
         log.info("用户扣款，参数：userId={}, money={}", userId, money);
         int retCount = this.baseMapper.debit(userId, money);
-        log.info("用户扣款，结果：", retCount);
+        log.info("用户扣款，结果：{}", retCount);
         if (0 >= retCount) {
             throw new MsgRuntimeException("用户扣款失败！");
         }

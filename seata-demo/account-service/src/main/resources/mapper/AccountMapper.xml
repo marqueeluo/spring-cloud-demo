@@ -16,8 +16,8 @@
 
 
     <update id="debit">
-      update t_account
-      set amount = amount-${amount}
+      update account
+      set money = money-${money}
       where user_id = #{userId}
     </update>
 

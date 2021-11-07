@@ -35,7 +35,7 @@ public class AccountController {
      * @param money
      * @return
      */
-    @PostMapping("/account/debit")
+    @PostMapping("/debit")
     RespResult debit(@RequestParam("userId") String userId, @RequestParam("money") BigDecimal money) {
         return accountService.debit(userId, money);
     }

@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> implements IStorageService {
 
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public RespResult deduct(String commodityCode, int count) {
         log.info("扣减商品库存，参数: commodityCode={}, count={}", commodityCode, count);

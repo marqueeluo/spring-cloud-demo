@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.luo.demo.sc.base.execption.MsgRuntimeException;
 import com.luo.demo.sc.base.model.result.RespResult;
 import com.luo.demo.seata.feign.AccountFeignClient;
-import com.luo.demo.seata.feign.StorageFeignClient;
 import com.luo.demo.seata.mapper.OrderMapper;
 import com.luo.demo.seata.model.entity.Order;
 import com.luo.demo.seata.service.IOrderService;
@@ -30,33 +29,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Resource
     private AccountFeignClient accountFeignClient;
-    @Resource
-    private StorageFeignClient storageFeignClient;
 
 
-//    /**
-//     * 下单：创建订单、减库存，涉及到两个服务
-//     *
-//     * @param userId
-//     * @param commodityCode
-//     * @param count
-//     */
-//    @GlobalTransactional
-//    @Transactional(rollbackFor = Exception.class)
-//    public void placeOrder(String userId, String commodityCode, Integer count) {
-//        /** 保存订单 */
-//        BigDecimal orderMoney = new BigDecimal(count).multiply(new BigDecimal(5));
-//        Order order = new Order();
-//        order.setUserId(userId);
-//        order.setCommodityCode(commodityCode);
-//        order.setCount(count);
-//        order.setMoney(orderMoney);
-//        this.save(order);
-//        storageFeignClient.deduct(commodityCode, count);
-//
-//    }
-
-
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public RespResult<Order> create(String userId, String commodityCode, Integer count) {
         //计算订单金额（假设商品单价5元）
@@ -80,6 +55,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         log.info("保存订单信息，结果：{}", result);
         if (!Boolean.TRUE.equals(result)) {
             throw new MsgRuntimeException("保存新订单信息失败!");
+        }
+
+        if ("product-3".equals(commodityCode)) {
+            throw new MsgRuntimeException("异常:模拟业务异常:Order branch exception");
         }
         return RespResult.successData(order);
 

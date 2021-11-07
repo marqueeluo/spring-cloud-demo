@@ -39,7 +39,7 @@ public enum RespCodeEnum {
      * @param code
      * @return
      */
-    public Boolean equalCode(String code) {
+    public Boolean equalCode(Integer code) {
         for (RespCodeEnum curEnum : values()) {
             if (curEnum.getCode().equals(code)) {
                 return true;

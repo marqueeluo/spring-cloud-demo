@@ -225,6 +225,7 @@ public class RespResult<T> {
         return RespResult.failed();
     }
 
+
     /**
      * 是否是成功结果
      *
@@ -232,10 +233,9 @@ public class RespResult<T> {
      * @return
      */
     public static Boolean isSuccess(RespResult respResult) {
-        Boolean success = (null != respResult && RespCodeEnum.SUCCESS.getCode() == respResult.getRespCode());
+        Boolean success = (null != respResult && RespCodeEnum.SUCCESS.equalCode(respResult.getRespCode()));
         return success;
     }
-
 
     public Integer getRespCode() {
         return respCode;
@@ -275,5 +275,16 @@ public class RespResult<T> {
 
     public void setRows(List<T> rows) {
         this.rows = rows;
+    }
+
+    @Override
+    public String toString() {
+        return "RespResult{" +
+                "respCode=" + respCode +
+                ", message='" + message + '\'' +
+                ", total=" + total +
+                ", data=" + data +
+                ", rows=" + rows +
+                '}';
     }
 }

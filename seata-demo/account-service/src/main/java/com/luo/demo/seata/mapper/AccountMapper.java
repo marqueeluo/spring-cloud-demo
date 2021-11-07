@@ -20,8 +20,8 @@ public interface AccountMapper extends BaseMapper<Account> {
      * 用户扣款
      *
      * @param userId
-     * @param amount
+     * @param money
      * @return
      */
-    int debit(@Param("userId") String userId, @Param("amount") BigDecimal amount);
+    int debit(@Param("userId") String userId, @Param("money") BigDecimal money);
 }

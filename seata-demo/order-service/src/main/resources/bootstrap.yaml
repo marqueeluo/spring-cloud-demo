@@ -1,10 +1,10 @@
 # Tomcat
 server:
-  port: 8081
+  port: 8083
 spring:
   application:
     # 应用名称
-    name: storage-service
+    name: order-service
   profiles:
     # 环境配置
     active: dev

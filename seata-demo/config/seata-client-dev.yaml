@@ -1,0 +1,28 @@
+seata:
+  enabled: true
+  tx-service-group: luo_dev_seata_demo_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  use-jdk-proxy: false
+  service:
+    vgroup-mapping:
+      luo_dev_seata_demo_tx_group: default
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: luo-dev
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      data-id: seataServer.properties
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: luo-dev
+      group : SEATA_GROUP
+      username: nacos
+      password: nacos
+      application: seata-server
+      cluster: default

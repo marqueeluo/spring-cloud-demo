@@ -10,7 +10,6 @@ import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -31,8 +30,16 @@ public class BusinessServiceImpl implements BusinessService {
     private OrderFeignClient orderFeignClient;
 
 
+    /**
+     * 下单操作 - AT全局事务通过@GlobalTransctional注解发起
+     *
+     * @param userId
+     * @param commodityCode
+     * @param count
+     * @return
+     */
+    @Override
     @GlobalTransactional
-    @Transactional(rollbackFor = Exception.class)
     public RespResult<Order> handleBusinessAt(String userId, String commodityCode, Integer count) {
         log.info("开始AT全局事务，XID={}", RootContext.getXID());
         /** 扣减库存 */

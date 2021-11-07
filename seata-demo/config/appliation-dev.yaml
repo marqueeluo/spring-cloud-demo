@@ -1,0 +1,23 @@
+# 统一日志配置
+logging:
+  #设置日志级别
+  level:
+    root: info
+    com.luo.demo.seata: debug
+  # 日志格式
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{36}] [%method,%line] - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{36}] [%method,%line] - %msg%n"
+  file:
+    # 日志文件名称及路径
+    name: /data/logs/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      # 重启时是否删除原日志
+      clean-history-on-start: false
+      # 滚动文件命名模式
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz
+      # 单日志文件大小
+      max-file-size: 10MB
+      # 保留的最大归档文件数量
+      max-history: 100
